@@ -13,23 +13,23 @@ import numpy as np
 
 def boostrap(statistic_func, iterations, data):
 	samples  = np.random.choice(data,replace = True, size = [iterations, len(data)])
-	#print samples.shape
+	#print (samples.shape)
 	data_mean = data.mean()
 	vals = []
 	for sample in samples:
 		sta = statistic_func(sample)
-		#print sta
+		#print (sta)
 		vals.append(sta)
 	b = np.array(vals)
-	#print b
+	#print (b)
 	lower, upper = np.percentile(b, [2.5, 97.5])
 	return data_mean,lower, upper
 
 
 
 if __name__ == "__main__":
-	df = pd.read_csv('./salaries.csv')
-	#print df.columns
+	df = pd.read_csv('./vehicles.csv')
+	#print (df.columns)
 	
 	data = df.values.T[1]
 	boots = []
@@ -50,13 +50,13 @@ if __name__ == "__main__":
 	sns_plot.axes[0,0].set_ylim(0,)
 	sns_plot.axes[0,0].set_xlim(0,100000)
 
-	sns_plot.savefig("bootstrap_confidence.png",bbox_inches='tight')
-	sns_plot.savefig("bootstrap_confidence.pdf",bbox_inches='tight')
+	sns_plot.savefig("bootstrapvehicles.png",bbox_inches='tight')
+	sns_plot.savefig("bootstrapvehicles.pdf",bbox_inches='tight')
 
 	
 	
-	#print ("Mean: %f")%(np.mean(data))
-	#print ("Var: %f")%(np.var(data))
+	print (("Mean: %f")%(np.mean(data)))
+	print (("Var: %f")%(np.var(data)))
 	
 
 
