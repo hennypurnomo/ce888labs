@@ -29,9 +29,10 @@ def mad(arr):
 
 if __name__ == "__main__":
 	df = pd.read_csv('./vehicles.csv')
-	newdf = df.dropna() 
-	print (newdf.columns)
-	sns_plot = sns.lmplot(newdf.columns[0], newdf.columns[1], data=df, fit_reg=False)   #creating plot using data from the file
+	df = df.dropna() 
+	print (df.columns)
+	#print (df)
+	sns_plot = sns.lmplot(df.columns[0], df.columns[1], data=df, fit_reg=False)   #creating plot using data from the file
 
 	sns_plot.axes[0,0].set_ylim(0,)
 	sns_plot.axes[0,0].set_xlim(0,)
@@ -42,7 +43,7 @@ if __name__ == "__main__":
 	sns_plot.savefig("vehiclesscaterplot.png",bbox_inches='tight')   #save scatter plots into png
 	sns_plot.savefig("vehiclesscaterplot.pdf",bbox_inches='tight')   #save scatter plots into pdf
  
-	data = newdf.values.T[1]
+	data = df.values.T[1]
 	
 	
 	print (("Mean: %f")%(np.mean(data)))
