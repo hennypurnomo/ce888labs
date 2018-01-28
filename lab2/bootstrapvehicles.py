@@ -1,3 +1,5 @@
+#Removing the nan values in array from melissaOu on https://stackoverflow.com/questions/11620914/removing-nan-values-from-an-array
+
 import matplotlib
 matplotlib.use('Agg')
 
@@ -11,7 +13,7 @@ import numpy as np
 
 
 
-def boostrap(statistic_func, iterations, data):
+def bootstrap(statistic_func, iterations, data):
 	samples  = np.random.choice(data,replace = True, size = [iterations, len(data)])
 	#print (samples.shape)
 	data_mean = data.mean()
@@ -31,33 +33,21 @@ if __name__ == "__main__":
 	df = pd.read_csv('./vehicles.csv')
 	#print (df.columns)
 	
-	data = df.values.T[1]
+	data = df.values.T[0]   #getting the data for current fleet column
 	boots = []
-	for i in range(100,100000,1000):
-		boot = boostrap(np.mean, i, data)
-		boots.append([i,boot[0], "mean"])
-		boots.append([i,boot[1], "lower"])
-		boots.append([i,boot[2], "upper"])
+	boots = bootstrap (np.std,10000, data)   
+	#print(boots) will print (STD, lower, upper)
+	print("Current Fleet Standard Deviation :", boots[0]) 
+	print("Current Fleet Upper Bound:" , boots[2])
+	print("Current Fleet Lower Bound" , boots[1])
 
 
-
-	df_boot = pd.DataFrame(boots,  columns=['Boostrap Iterations','Mean',"Value"])
-	sns_plot = sns.lmplot(df_boot.columns[0],df_boot.columns[1], data=df_boot, fit_reg=False,  hue="Value")
-
-
-
-
-	sns_plot.axes[0,0].set_ylim(0,)
-	sns_plot.axes[0,0].set_xlim(0,100000)
-
-	sns_plot.savefig("bootstrapvehicles.png",bbox_inches='tight')
-	sns_plot.savefig("bootstrapvehicles.pdf",bbox_inches='tight')
-
-	
-	
-	print (("Mean: %f")%(np.mean(data)))
-	print (("Var: %f")%(np.var(data)))
-	
-
+	data = df.values.T[1]   #getting the data for new fleet column
+	data = data[np.logical_not(np.isnan(data))]    #removing nan values in array
+	boots = []
+	boots = bootstrap (np.std,10000, data)
+	print("\nNew Fleet Standard Deviation :", boots[0])
+	print("New Fleet Upper Bound:" , boots[2])
+	print("New Fleet Lower Bound" , boots[1])
 
 	
