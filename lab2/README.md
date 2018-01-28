@@ -17,11 +17,15 @@ This image shows a histogram from vehicles.csv.
 This file is used to simulate data from vehicles.csv and calculate the standard deviation (STD) for current and new fleet with 10000 iteration. Because of some missing values in new fleet data, nan values was omitted with logical-not(np.isnan) function. 
 
 Current Fleet Standard Deviation : 20.14457831325301
+
 Current Fleet Upper Bound: 6.935700532006677
+
 Current Fleet Lower Bound 5.799709966677345
 
 New Fleet Standard Deviation : 30.481012658227847
+
 New Fleet Upper Bound: 6.8793514727736085
+
 New Fleet Lower Bound 5.1605477376344036
 
 This is the result of Standard Deviation, upper bound and lower bound of those two kinds of fleet.
