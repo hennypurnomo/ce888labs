@@ -10,6 +10,14 @@ This image represents a scaterplot from vehicles.csv.
 
 This image shows a histogram from vehicles.csv.
 
+Index(['Current fleet', ' New Fleet'], dtype='object')
+Mean: 30.481013
+Median: 32.000000
+Var: 36.831918
+std: 6.068931
+MAD: 4.000000
+This is the result of mean, median, var, std and mad.
+
 
 
 ### bootstrapvehicles.py
