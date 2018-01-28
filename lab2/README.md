@@ -26,6 +26,7 @@ This is the result of mean, median, var, std and mad.
 
 
 
+
 ### bootstrapvehicles.py
 
 This file is used to simulate data from vehicles.csv and calculate the standard deviation (STD) for current and new fleet with 10000 iteration. Because of some missing values in new fleet data, nan values was omitted with logical-not(np.isnan) function. 
