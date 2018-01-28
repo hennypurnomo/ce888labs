@@ -1,5 +1,5 @@
-#Changing missing values into N/A from https://pandas.pydata.org/pandas-docs/stable/missing_data.html
 #Adding label for x and y axis from https://stackoverflow.com/questions/42223587/plt-scatter-how-to-add-title-and-xlabel-and-ylabel
+#Dropping Nan values from https://stackoverflow.com/questions/13413590/how-to-drop-rows-of-pandas-dataframe-whose-value-in-certain-columns-is-nan
 
 import matplotlib
 matplotlib.use('Agg')
@@ -11,8 +11,7 @@ import matplotlib.pyplot as plt  #additional customization
 import seaborn as sns            #plotting and styling
 
 import numpy as np 
-
-pd.options.mode.use_inf_as_na = True   
+  
 
 # def permutation(statistic, error):
 
@@ -30,8 +29,9 @@ def mad(arr):
 
 if __name__ == "__main__":
 	df = pd.read_csv('./vehicles.csv')
-	print (df.columns)
-	sns_plot = sns.lmplot(df.columns[0], df.columns[1], data=df, fit_reg=False)   #creating plot using data from the file
+	newdf = df.dropna() 
+	print (newdf.columns)
+	sns_plot = sns.lmplot(newdf.columns[0], newdf.columns[1], data=df, fit_reg=False)   #creating plot using data from the file
 
 	sns_plot.axes[0,0].set_ylim(0,)
 	sns_plot.axes[0,0].set_xlim(0,)
@@ -42,7 +42,7 @@ if __name__ == "__main__":
 	sns_plot.savefig("vehiclesscaterplot.png",bbox_inches='tight')   #save scatter plots into png
 	sns_plot.savefig("vehiclesscaterplot.pdf",bbox_inches='tight')   #save scatter plots into pdf
  
-	data = df.values.T[1]
+	data = newdf.values.T[1]
 	
 	
 	print (("Mean: %f")%(np.mean(data)))
