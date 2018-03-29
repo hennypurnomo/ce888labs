@@ -15,7 +15,7 @@ from keras.layers import Input, Dense, Activation, Dropout
 from keras.models import Model
 from keras.utils import np_utils
 
-
+n_hidden_layers = 6 # number of hidden layer
 batch_size = 128
 nb_classes = 10
 nb_epoch = 20
@@ -39,6 +39,11 @@ Y_test = np_utils.to_categorical(y_test, nb_classes)
 inputs = Input(shape=(784,))
 x = inputs
 
+for i in range(n_hidden_layers):
+    x = Dense(64, activation = 'relu')(x)
+
+
+x = Dropout(0.5)(x)#prevent overfitting
 
 predictions = Dense(nb_classes, activation='softmax')(x)
     
@@ -58,3 +63,4 @@ score = model.evaluate(X_test, Y_test, verbose=0)
 
 print('Test score:', score)
 print('Test accuracy:', score)
+print('The number of hidden layer: ', n_hidden_layers)
